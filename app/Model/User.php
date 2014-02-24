@@ -56,7 +56,11 @@
 				'notEmpty' => array(
 					'rule' => 'notEmpty',
 					'last' => 'true'
-				)
+				),
+				'hasAllowedChars' => [
+					'rule' => ['validateHasAllowedChars'],
+					'last' => true
+				]
 			),
 			'user_type' => array(
 				'allowedChoice' => array(
@@ -183,7 +187,8 @@
 				'user_hp',
 				'user_place',
 				'user_email',
-				/*
+				'user_real_name',
+			/*
 				Wenn @mlf sollte, wenn die Performance es zulässt, der Name sowieso nicht in
 				der `entries` Tabelle stehen, sondern sauber über die `User.id` Verbindung
 				aus der `User` Tabelle entnommen werden. Dies ist im Moment schon der Fall,
@@ -200,6 +205,11 @@
 			'Mlf2PasswordHasher',
 			'MlfPasswordHasher'
 		];
+
+		/**
+		 * @var array chars not allowed in username
+		 */
+		protected $_disallowedCharsInUsername = ['\'', ';', '&', '<', '>' ];
 
 /**
  * True if registerGc garbage collection has ran at this request
@@ -368,6 +378,15 @@
 				$valid = true;
 			}
 			return $valid;
+		}
+
+		public function validateHasAllowedChars($data) {
+			foreach ($this->_disallowedCharsInUsername as $char) {
+				if (mb_strpos($data['username'], $char) !== false) {
+					return false;
+				}
+			}
+			return true;
 		}
 
 /**

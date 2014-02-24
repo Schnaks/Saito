@@ -615,6 +615,9 @@ msgstr ""
 msgid "preview"
 msgstr "Preview"
 
+msgid "model.user.validate.username.hasAllowedChars"
+msgstr "The name contains forbidden characters."
+
 #: View/Entries/add.ctp:88 Controller/UsersController.php:477
 msgid "error_subject_empty"
 msgstr "Subject must not be empty."

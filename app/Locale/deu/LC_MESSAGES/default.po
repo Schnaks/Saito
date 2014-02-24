@@ -586,6 +586,9 @@ msgstr "Administrator"
 msgid "ud_mod"
 msgstr "Moderator"
 
+msgid "model.user.validate.username.hasAllowedChars"
+msgstr "Der Name enthält unerlaubte Sonderzeichen."
+
 #: View/Elements/users/add_form_core.ctp:4
 msgid "error_name_reserved"
 msgstr "Der Name ist bereits vergeben."
